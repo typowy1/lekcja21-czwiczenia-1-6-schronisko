@@ -5,10 +5,12 @@ public class Animal {
 
     private String name;
     private String description;
+    private String img; //link do obrazka
 
-    public Animal(String name, String description) {
+    public Animal(String name, String description, String img) {
         this.name = name;
         this.description = description;
+        this.img = img;
     }
 
     public String getName() {
@@ -25,5 +27,13 @@ public class Animal {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

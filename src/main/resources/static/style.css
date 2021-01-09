@@ -1,10 +1,31 @@
-.header{
+.header {
     background: #ccc;
     padding: 30px;
-/*    kolor dla headera i odstepy 30px*/
+    /*    kolor dla headera i odstepy 30px*/
 }
 
-.content{
+.content {
     margin-left: 50px;
-/*    margines dla elementow klasy content*/
+    /*    margines dla elementow klasy content*/
+}
+
+/*ustawiamy kolejność wyświetlania w jednej lini z strony flex, dla klasy animal kolejnosc obrazek, z prawej nazwa a pod nią opis*/
+.animal {
+    display: flex;
+    flex-direction: row;
+}
+
+.animal-info {
+    display: flex;
+    flex-direction: column;
+    /*    będzie jeden pod drugim, nazwa a pod nią opis*/
+}
+
+.animal-info h2, .animal-info p {
+    text-decoration: none;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
 }

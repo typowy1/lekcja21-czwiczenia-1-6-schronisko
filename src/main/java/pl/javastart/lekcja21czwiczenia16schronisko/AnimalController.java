@@ -1,9 +1,12 @@
 package pl.javastart.lekcja21czwiczenia16schronisko;
 
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Set;
 
 @Controller
 public class AnimalController {
@@ -14,6 +17,15 @@ public class AnimalController {
     public AnimalController(AnimalRepository animalRepository) {
         this.animalRepository = animalRepository;
     } //podczas tworzenia controlera spring poszuka repozytorium, uruchomi konstruktor tworzac repozytorium i poda do kontrolera
+
+    //getmaping obsługujący strone główną
+    @GetMapping("/")
+    public String home(Model model) { // dodajemy pętle która wywoła sie tyle razy ile jest zwierząt
+        Set<Animal> animals = animalRepository.findAll();
+        model.addAttribute("animals", animals);
+        return "home"; // -> resources/templates/home.html
+    }
+
 
     @GetMapping("/zwierzak")//mapuje stronę zwiarzaka
     public String details(@RequestParam String imie, Model model) {  // przewchwytuje parametr imie, i przeszukamy repozytorium szukając zwierzaka o danym imieniu

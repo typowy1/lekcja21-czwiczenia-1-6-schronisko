@@ -21,6 +21,7 @@
 <!--dodajemy zmienną by dynamicznie wyświetlała się nazwa zwierzaka którego szukamy, to samo tyczy sie decription,
 dostajemy sie zapomocą obiektu animal, nie ma potrzeby używac geterów -->
     <h2 th:text="${animal.name}">Nazwa</h2>
+    <img th:src="${animal.img}" class="img"/>
     <p th:text="${animal.description}">Tutaj dać info o zwierzaku</p>
 </div>
 
