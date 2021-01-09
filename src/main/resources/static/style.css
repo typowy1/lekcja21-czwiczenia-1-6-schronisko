@@ -1,0 +1,10 @@
+.header{
+    background: #ccc;
+    padding: 30px;
+/*    kolor dla headera i odstepy 30px*/
+}
+
+.content{
+    margin-left: 50px;
+/*    margines dla elementow klasy content*/
+}

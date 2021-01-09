@@ -1,0 +1,19 @@
+https://bootcamp.javastart.pl/konto/cwiczenie/1274
+
+Schronisko #1 - Strona główna i szczegóły
+Treść zadania
+Strona główna
+
+Stwórz stronę internetową schroniska dla zwierząt dostępną pod adresem http://localhost:8080.
+
+Na stronie głównej powinien znaleźć się banner z logo schroniska. Poniżej linki do zwierząt które można adoptować.
+
+Linki powinny prowadzić do podstron:
+
+    http://localhost:8080/zwierzak?imie=Azor
+    http://localhost:8080/zwierzak?imie=Rudy
+
+
+
+rozwiązanie
+http://git.javastart.pl/rozwiazania/schronisko-1-413123
