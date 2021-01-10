@@ -37,7 +37,7 @@ public class AnimalController {
 //            model.addAttribute("name", animal.getName());
 //            model.addAttribute("description", animal.getDescription());
 
-            //lepiej jest dac w modelu obiekt i w pliku odniesc sie do obiektu i pobrac potrzebna informacje np animal.getName
+            //lepiej jest dac w modelu obiekt i w pliku odniesc sie do obiektu i pobrac potrzebna informacje np animal.name
             model.addAttribute("animal", animal);
             return "animal"; // -> resources/templates/animal.html
         } else {  // jeśli nie znajdziemy zwierzaka to zwróci przekierowanie na strone główną
