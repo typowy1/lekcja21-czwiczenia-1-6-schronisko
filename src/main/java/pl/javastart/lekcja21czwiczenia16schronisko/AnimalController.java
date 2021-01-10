@@ -52,7 +52,7 @@ public class AnimalController {
         }
     }
 
-    //dodajemy kolejną strone dodawania /dodaj
+    //dodajemy kolejną strone dodawania /dodaj, model obiektu animal
     @GetMapping("/dodaj")
     public String addForm(Model model) {
         model.addAttribute("animal", new Animal());
@@ -63,6 +63,6 @@ public class AnimalController {
     @PostMapping("/dodaj")
     public String addAnimal(Animal animal) {
         animalRepository.add(animal);
-        return "redirect:/zwierzak?imie=" + animal.getName(); //zwraca przekierowanie na stronę główną
+        return "redirect:/zwierzak?imie=" + animal.getName(); //zwraca przekierowanie na stronę zwierzaka utworzonego
     }
 }
