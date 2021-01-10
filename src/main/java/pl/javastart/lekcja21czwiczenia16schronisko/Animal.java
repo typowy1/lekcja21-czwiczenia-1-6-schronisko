@@ -6,11 +6,21 @@ public class Animal {
     private String name;
     private String description;
     private String img; //link do obrazka
+    private AnimalSpecies species;
 
-    public Animal(String name, String description, String img) {
+    public Animal(String name, String description, String img, AnimalSpecies species) {
         this.name = name;
         this.description = description;
         this.img = img;
+        this.species = species;
+    }
+
+    public AnimalSpecies getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(AnimalSpecies species) {
+        this.species = species;
     }
 
     public String getName() {

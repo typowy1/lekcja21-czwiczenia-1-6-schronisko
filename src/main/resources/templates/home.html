@@ -15,13 +15,20 @@
 </div>
 
 <div class="content">
+<!--    wszystkie to stona główna-->
+    Gatunki:
+    <a href="/">Wszystkie</a>
+    <a href="/?gatunek=CAT">Koty</a>
+    <a href="/?gatunek=DOG">Psy</a>
+    <a href="/?gatunek=OTHER">Inne</a>
+
     <h2>Zwierzaki szukające domu:</h2>
 <!--    animal w ramach zmiennej animals, animal to każdy kolejny element, jeden do jednego for(Animal animal:animals)
 @w href saje dynamiczny link, stała plus zmienna dynamiczna imie w parametrze linku @{'/zwierzak?imie=' + ${animal.name}}"-->
     <a th:href="@{'/zwierzak?imie=' + ${animal.name}}" class="animal" th:each="animal: ${animals}">
         <img th:src="${animal.img}" class="img"/>
         <!--ml-2 jest to klasa z bootsrapa definiująca margines lewy-->
-        <div class="animal-info ml-2">
+        <div class="animal-info ml-4">
             <h2 th:text="${animal.name}">Azor</h2>
 <!--dynamiczna nazwa kolejnego zwierzaka, czyli Azor zostanie nadpisane-->
             <p th:text="${animal.description}">opis opis opis</p>

@@ -1,6 +1,5 @@
 package pl.javastart.lekcja21czwiczenia16schronisko;
 
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,15 @@ public class AnimalController {
 
     //getmaping obsługujący strone główną
     @GetMapping("/")
-    public String home(Model model) { // dodajemy pętle która wywoła sie tyle razy ile jest zwierząt
-        Set<Animal> animals = animalRepository.findAll();
+    public String home(Model model, @RequestParam(required = false, name = "gatunek") AnimalSpecies species) { // dodajemy pętle która wywoła sie tyle razy ile jest zwierząt
+        //@RequestParam(required = false) AnimalSpecies gatunek - parametr nie jst wymagany, i w parametrze sa enumy
+        Set<Animal> animals;
+        if (species != null) {
+            animals = animalRepository.findBySpecies(species); //jak znajdzie w adrsie url gatunek z parametrem np cat to go wyswietli pod tym adresem
+
+        } else {
+            animals = animalRepository.findAll(); //gatunek w adresie url nie wystepuje i wtedy wyswietla wszystkie
+        }
         model.addAttribute("animals", animals);
         return "home"; // -> resources/templates/home.html
     }
