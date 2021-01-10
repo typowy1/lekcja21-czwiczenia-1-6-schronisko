@@ -51,4 +51,8 @@ public class AnimalRepository {
         return filtered;
         //stowrzyłem set przefiltrowanych zwierzaków, jak któryś będzie się zgadzał z wybranym to dodajemt go do pofiltrowanego setu
     }
+
+    public void add(Animal animal) {
+        animals.add(animal);
+    }
 }

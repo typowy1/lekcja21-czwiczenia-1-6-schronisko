@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<!--dodawanie zwierzaka-->
+<head>
+    <meta charset="UTF-8">
+    <title>Schronisko</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+<body>
+<!--z pliku fragments zostanie zaciągnięty wspólny element na tą stronę-->
+<div th:replace="fragments :: header"></div>
+
+<div class="content">
+    <!--formularz z bootstrapa
+    formularz wysyłamy do dodaj metodą post, wskazujemy do jakiego obiektu ma dodawac, animal i potem mapujemy input do danego pola animal-->
+    <form action="/dodaj" method="post" th:object="${animal}">
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Imię</label>
+            <div class="col-sm-10">
+<!--                odpowiedzialny za pole name-->
+                <input type="text" class="form-control" id="staticEmail" placeholder="Imię" th:field="*{name}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Url obrazka</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword" placeholder="Url obrazka" th:field="*{img}">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="species" class="col-sm-2 col-form-label">Gatunek</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="species" th:field="*{species}">
+<!--                    wybierz, nie można wybrać i jest domyślnie wybrany-->
+                    <option disabled selected value="empty">Wybierz...</option>
+                    <option value="CAT">Kot</option>
+                    <option value="DOG">Pies</option>
+                    <option value="OTHER">Inne</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="desc" class="col-sm-2 col-form-label">Opis</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="desc" mb-3 placeholder="Opis" row th:field="*{description}"></textarea>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="desc" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input type="submit" value="Dodaj" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+<!--główna strona, dodajemy boostrapa-->

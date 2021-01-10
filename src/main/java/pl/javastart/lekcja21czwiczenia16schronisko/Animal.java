@@ -8,6 +8,9 @@ public class Animal {
     private String img; //link do obrazka
     private AnimalSpecies species;
 
+    public Animal() {
+    }
+
     public Animal(String name, String description, String img, AnimalSpecies species) {
         this.name = name;
         this.description = description;

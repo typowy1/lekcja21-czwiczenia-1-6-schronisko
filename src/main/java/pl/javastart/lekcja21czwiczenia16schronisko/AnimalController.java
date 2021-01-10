@@ -3,6 +3,7 @@ package pl.javastart.lekcja21czwiczenia16schronisko;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
@@ -49,5 +50,19 @@ public class AnimalController {
         } else {  // jeśli nie znajdziemy zwierzaka to zwróci przekierowanie na strone główną
             return "redirect:/";
         }
+    }
+
+    //dodajemy kolejną strone dodawania /dodaj
+    @GetMapping("/dodaj")
+    public String addForm(Model model) {
+        model.addAttribute("animal", new Animal());
+        return "add"; //pod adresem /dodaj zostanie zwrócony szablon add
+    }
+
+    //dodanie użytkownika do repozytorium
+    @PostMapping("/dodaj")
+    public String addAnimal(Animal animal) {
+        animalRepository.add(animal);
+        return "redirect:/zwierzak?imie=" + animal.getName(); //zwraca przekierowanie na stronę główną
     }
 }
