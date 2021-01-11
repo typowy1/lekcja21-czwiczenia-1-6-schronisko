@@ -15,7 +15,11 @@
 <div class="content">
 
     <!--link kierujący do strony głównej-->
-    <a href="/">Powrót do strony główne</a>
+    <a href="/">Powrót do strony główne</a><br/>
+<!--  tworzę strone edytowania która za pomocą parametru będzie przechodziła do edycji konkretnego zwierzaka
+link do strony edycji zwierzaka, dostępny z poziomu informacji o zwierzaku -->
+    <a th:href="@{|/edytuj?imie=${animal.name}|}">Edytuj to ogłoszenie</a><br/>
+
 <!--dodajemy zmienną by dynamicznie wyświetlała się nazwa zwierzaka którego szukamy, to samo tyczy sie decription,
 dostajemy sie zapomocą obiektu animal, nie ma potrzeby używac geterów -->
     <h2 th:text="${animal.name}">Nazwa</h2>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<!--dodawanie zwierzaka-->
+<!--dodawanie lub edytowanie zwierzaka-->
 <head>
     <meta charset="UTF-8">
     <title>Schronisko</title>
@@ -14,8 +14,22 @@
 
 <div class="content">
     <!--formularz z bootstrapa
-    formularz wysyłamy do dodaj metodą post, wskazujemy do jakiego obiektu ma dodawac, animal i potem mapujemy input do danego pola animal-->
-    <form action="/dodaj" method="post" th:object="${animal}">
+    formularz wysyłamy do dodaj metodą post, wskazujemy do jakiego obiektu ma dodawac, animal i potem mapujemy input do danego pola animal
+    action będziemy modyfikować w zależności od tego w jakim stanie jestesmy dodawania czy edycji za pomocą zmiennej mode która zawiera zmienne edit lub add
+    za pomocą warunku to robimy jeżeli mode == edytuj to przekieruj na strone edytuj w przeciwnym przypadku na dodaj
+    dynamicznie zmieniamy adres pod który ma być wysłany formularz-->
+    <form th:action="${mode == 'edit' ? '/edytuj' : '/dodaj'}" method="post" th:object="${animal}">
+<!--        w wthymeleaf porownujemy stringi za pomocą ==-->
+<!--        jeżeli mode równa się edit to zwroc/uzyj /edytuj
+w przeciwnym przypadku użyj tego czyli
+if(mode == edit){
+return '/edit';
+}else {
+return'/dodaj';-->
+
+<!--        niewidoczne dla uzytkownika pole z id zwierzaka-->
+        <input type="hidden" th:field="*{id}">
+
         <div class="mb-3 row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Imię</label>
             <div class="col-sm-10">
@@ -50,7 +64,8 @@
         <div class="mb-3 row">
             <label for="desc" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <input type="submit" value="Dodaj" class="btn btn-primary"/>
+<!-- dynamiczna nazwa przycisku w zaleznosci na ktorej stronie jest użytkownik-->
+                <input type="submit" th:value="${mode == 'edit' ? 'Edytuj' : 'Dodaj'}" class="btn btn-primary"/>
             </div>
         </div>
     </form>

@@ -16,14 +16,14 @@ public class AnimalRepository {
 
     public AnimalRepository() {
         animals = new HashSet<>();
-        animals.add(new Animal("Azor", "Azor to super piesek", "/azor.jpg", AnimalSpecies.DOG)); //plik dostepny w folderze static, a jego adres to /azor.jpg, czyli po głównej stronie/azor.jpg
-        animals.add(new Animal("Rudy", "Rudy to kot",
+        animals.add(new Animal(1L, "Azor", "Azor to super piesek", "/azor.jpg", AnimalSpecies.DOG)); //plik dostepny w folderze static, a jego adres to /azor.jpg, czyli po głównej stronie/azor.jpg
+        animals.add(new Animal(2L, "Rudy", "Rudy to kot",
                 "https://www.koty.pl/wp-content/uploads/2019/02/rudy-kotek-3-e1550138386733.jpg", AnimalSpecies.CAT));
-        animals.add(new Animal("Urek", "Urek to Ryś",
+        animals.add(new Animal(3L, "Urek", "Urek to Ryś",
                 "https://www.koty.pl/wp-content/uploads/2019/02/rudy-kotek-3-e1550138386733.jpg", AnimalSpecies.OTHER));
-        animals.add(new Animal("Nyga", "Nyga to Dzik",
+        animals.add(new Animal(4L, "Nyga", "Nyga to Dzik",
                 "https://www.koty.pl/wp-content/uploads/2019/02/rudy-kotek-3-e1550138386733.jpg", AnimalSpecies.OTHER));
-        animals.add(new Animal("Ziom", "Zioom to mały pies",
+        animals.add(new Animal(5L, "Ziom", "Zioom to mały pies",
                 "https://www.koty.pl/wp-content/uploads/2019/02/rudy-kotek-3-e1550138386733.jpg", AnimalSpecies.DOG));
     }
 
@@ -31,6 +31,16 @@ public class AnimalRepository {
         //przechodzimy po wszystkich elementach zbioru
         for (Animal animal : animals) {
             if (animal.getName().equals(name)) {
+                return animal; //zwracamy znalziony obiekt
+            }
+        }
+        return null; //jeśli nie znajdziemy nic to zwracamy nulla
+    }
+
+    public Animal findById(Long id) {
+        //przechodzimy po wszystkich elementach zbioru
+        for (Animal animal : animals) {
+            if (animal.getId().equals(id)) {
                 return animal; //zwracamy znalziony obiekt
             }
         }
@@ -54,5 +64,9 @@ public class AnimalRepository {
 
     public void add(Animal animal) {
         animals.add(animal);
+    }
+
+    public void update(Animal animalInDB) {
+        animals.add(animalInDB);
     }
 }

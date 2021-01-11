@@ -56,13 +56,35 @@ public class AnimalController {
     @GetMapping("/dodaj")
     public String addForm(Model model) {
         model.addAttribute("animal", new Animal());
-        return "add"; //pod adresem /dodaj zostanie zwrócony szablon add
+        model.addAttribute("mode", "add"); // dodajemy informacje o tym ze jestesmy w trybie dodawania
+        return "addOrEdit"; //pod adresem /dodaj zostanie zwrócony szablon add
     }
 
     //dodanie użytkownika do repozytorium
     @PostMapping("/dodaj")
     public String addAnimal(Animal animal) {
         animalRepository.add(animal);
+        return "redirect:/zwierzak?imie=" + animal.getName(); //zwraca przekierowanie na stronę zwierzaka utworzonego
+    }
+
+    //dodajemy stronę edycji z parametrami, tu po przejsciu na strone automatycznie będą wpisane w pola informacje o zwierzaku
+    @GetMapping("/edytuj")
+    public String editForm(Model model, @RequestParam String imie) {
+        Animal animal = animalRepository.findByName(imie);
+        model.addAttribute("animal", animal); //do modelu dodałem obbiekt
+        model.addAttribute("mode", "edit"); // dodajemy informacje o tym ze jestesmy w trybie edycji
+        return "addOrEdit";
+    }
+
+    //dodajemy możliwosć edycji za pomocą metody post
+    @PostMapping("/edytuj")
+    public String editAnimal(Animal animal) {
+        Animal animalInDB = animalRepository.findById(animal.getId()); //szukamy wpisanego zwierzaka w bazie danych po id
+        animal.setName(animal.getName());
+        animal.setDescription(animal.getDescription());
+        animal.setImg(animal.getImg());
+        animal.setSpecies(animal.getSpecies());
+        animalRepository.update(animalInDB);
         return "redirect:/zwierzak?imie=" + animal.getName(); //zwraca przekierowanie na stronę zwierzaka utworzonego
     }
 }
