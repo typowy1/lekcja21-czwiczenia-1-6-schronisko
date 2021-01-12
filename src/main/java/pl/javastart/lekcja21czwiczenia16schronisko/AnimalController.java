@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -20,16 +23,40 @@ public class AnimalController {
 
     //getmaping obsługujący strone główną
     @GetMapping("/")
-    public String home(Model model, @RequestParam(required = false, name = "gatunek") AnimalSpecies species) { // dodajemy pętle która wywoła sie tyle razy ile jest zwierząt
+    public String home(Model model, @RequestParam(required = false, name = "gatunek") AnimalSpecies species,
+                       @RequestParam(required = false) String order, @RequestParam(required = false) String searchText) { // dodajemy pętle która wywoła sie tyle razy ile jest zwierząt
         //@RequestParam(required = false) AnimalSpecies gatunek - parametr nie jst wymagany, i w parametrze sa enumy
+        // @RequestParam String order parametr do sortowania, sortowanie nie jest wymagane
         Set<Animal> animals;
-        if (species != null) {
-            animals = animalRepository.findBySpecies(species); //jak znajdzie w adrsie url gatunek z parametrem np cat to go wyswietli pod tym adresem
 
+        if (searchText != null) {
+            animals = animalRepository.findByNameContains(searchText);
         } else {
-            animals = animalRepository.findAll(); //gatunek w adresie url nie wystepuje i wtedy wyswietla wszystkie
+            if (species != null) {
+                animals = animalRepository.findBySpecies(species); //jak znajdzie w adrsie url gatunek z parametrem np cat to go wyswietli pod tym adresem
+
+            } else {
+                animals = animalRepository.findAll(); //gatunek w adresie url nie wystepuje i wtedy wyswietla wszystkie
+            }
         }
-        model.addAttribute("animals", animals);
+
+        List<Animal> animalList = new ArrayList<>(animals); // ze zbioru tworzymy liste którą możemy posortować
+
+        if (order != null) { // jeśli sortowanie jest różne od null to wtedy będziemy sortować
+
+            int asc = (order.equals("ASC")) ? 1 : -1; // jeżeli moja wartość będzie ASC(rosnąco) to będzie 1 to
+            // sortuje rosnąco jeśli wartość nie będzie ASC to będzie -1 i to będzie malejąco
+            animalList.sort(new Comparator<Animal>() { //sortujemy jako klase anonimową zapomoca imienia
+                @Override
+                public int compare(Animal o1, Animal o2) {
+                    return o1.getName().compareTo(o2.getName()) * asc;
+                }
+            });
+
+        }
+
+        model.addAttribute("animals", animalList); //sortujemy wtedy kiedy jest potrzeba
+        model.addAttribute("species", species); //dodanie do modelu gatunku do sortowania
         return "home"; // -> resources/templates/home.html
     }
 

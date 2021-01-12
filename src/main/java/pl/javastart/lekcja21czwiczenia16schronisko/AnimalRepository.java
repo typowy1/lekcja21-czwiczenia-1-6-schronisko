@@ -69,4 +69,17 @@ public class AnimalRepository {
     public void update(Animal animalInDB) {
         animals.add(animalInDB);
     }
+
+    public Set<Animal> findByNameContains(String searchText) { // szukanie po wpisanej nazwie, częsci nazwy np jeśli nazwa zawiera rud wyświetl je
+        Set<Animal> filtered = new HashSet<>();
+
+
+
+        for (Animal animal : animals) {
+            if (animal.getName().toLowerCase().contains(searchText.toLowerCase())) {
+                filtered.add(animal);
+            }
+        }
+        return filtered;
+    }
 }
